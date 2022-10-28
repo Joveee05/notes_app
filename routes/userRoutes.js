@@ -22,13 +22,13 @@ router.patch('/updateMe', userController.updateMe);
 
 router.patch('/deleteMe', userController.deleteMe);
 
-router.use(authController.restrictTo('admin'));
-
 router
   .route('/:id')
   .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
+
+router.use(authController.restrictTo('admin'));
 
 router.get('/', userController.getAllUsers);
 
