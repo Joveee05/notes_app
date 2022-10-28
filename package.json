@@ -1,0 +1,32 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "Creating a simple notes application",
+  "main": "server.js",
+  "scripts": {
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "start": "nodemon server.js"
+  },
+  "author": "Brian E. Etaghene",
+  "license": "MIT",
+  "engines": {
+    "node": "16.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.11.0",
+    "mongoose": "^5.13.15",
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.5",
+    "validator": "^13.7.0"
+  }
+}
