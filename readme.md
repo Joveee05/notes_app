@@ -6,8 +6,8 @@ Users must signup and be logged in before any operation is performed.
 
 This app can do:
 
-- 🟠 CRUD Operations:\ncreate/read/update/delete notes
-- 🟠 Allows a user to sign-up, login, logout, update password, delete account, search notes by title, add and remove notes from favourites.
+- CRUD Operations:create/read/update/delete notes
+- Allows a user to sign-up, login, logout, update password, delete account, search notes by title, add and remove notes from favourites.
 
 Deployed on Heroku:
 
