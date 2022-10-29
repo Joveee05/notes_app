@@ -8,6 +8,8 @@ router.use(authController.protect);
 
 router.get('/', noteController.getAllNotes);
 
+router.get('/myNotes', noteController.getMyNotes);
+
 router.post('/new-note', noteController.createNote);
 
 router.get('/search', noteController.searchNote);
