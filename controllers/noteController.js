@@ -5,7 +5,7 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getAllNotes = catchAsync(async (req, res, next) => {
-  const note = await Note.find().populate('user');
+  const note = await Note.find().populate('user').sort('-createdAt');
   res.status(200).json({
     status: 'success',
     results: note.length,
@@ -18,7 +18,7 @@ exports.getAllNotes = catchAsync(async (req, res, next) => {
 exports.getMyNotes = catchAsync(async (req, res, next) => {
   let filter = {};
   if (req.user.id) filter = { user: req.user.id };
-  const note = await Note.find(filter);
+  const note = await Note.find(filter).sort('-createdAt');
   res.status(200).json({
     status: 'success',
     results: note.length,

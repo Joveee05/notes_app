@@ -1,33 +1,32 @@
 const mongoose = require('mongoose');
 
-const notesSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: [true, 'A note must have a title'],
-  },
-  description: {
-    type: String,
-  },
-  body: {
-    type: String,
-    required: [true, 'A note must have a body'],
-  },
-  favourite: [
-    {
+const notesSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, 'A note must have a title'],
+    },
+    description: {
+      type: String,
+    },
+    body: {
+      type: String,
+      required: [true, 'A note must have a body'],
+    },
+    favourite: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
+    user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
+      required: [true, 'A note must belong to a user.'],
     },
-  ],
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: [true, 'A note must belong to a user.'],
   },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  { timestamps: true }
+);
 
 notesSchema.pre(/^find/, function (next) {
   this.populate({

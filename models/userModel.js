@@ -3,58 +3,61 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const validator = require('validator');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'A user must have a name'],
-    unique: [true, 'This name has already been taken'],
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: [true, 'A user must have an email'],
-    unique: [true, 'This email has already been used'],
-    validate: [validator.isEmail, 'Please provide a valid email address'],
-    lowercase: true,
-    trim: true,
-  },
-  role: {
-    type: String,
-    enum: ['user', 'admin'],
-    default: 'user',
-  },
-  photo: {
-    type: String,
-    default: 'default.jpg',
-  },
-  password: {
-    type: String,
-    required: [true, 'A user must have a password'],
-    unique: true,
-    minLength: 8,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      validator: function (el) {
-        return el === this.password;
-      },
-      message: 'Passwords do not match',
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'A user must have a name'],
+      unique: [true, 'This name has already been taken'],
+      trim: true,
     },
-    select: false,
+    email: {
+      type: String,
+      required: [true, 'A user must have an email'],
+      unique: [true, 'This email has already been used'],
+      validate: [validator.isEmail, 'Please provide a valid email address'],
+      lowercase: true,
+      trim: true,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
+    photo: {
+      type: String,
+      default: 'default.jpg',
+    },
+    password: {
+      type: String,
+      required: [true, 'A user must have a password'],
+      unique: true,
+      minLength: 8,
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Passwords do not match',
+      },
+      select: false,
+    },
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
+    passwordChangedAt: {
+      type: Date,
+      select: false,
+    },
   },
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-  passwordChangedAt: {
-    type: Date,
-    select: false,
-  },
-});
+  { timestamps: true }
+);
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
