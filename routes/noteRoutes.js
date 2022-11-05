@@ -1,8 +1,86 @@
 const express = require('express');
 const noteController = require('../controllers/noteController');
 const authController = require('../controllers/authentication');
-
 const router = express.Router();
+
+/**
+ * @swagger
+ * components:
+ *    schemas:
+ *      Note:
+ *        type: object
+ *        required:
+ *          -title
+ *          -body
+ *        properties:
+ *           id:
+ *              type: String
+ *              description: The auto-generated id of the note
+ *           title:
+ *              type: String
+ *              description: The note title
+ *           description:
+ *              type: String
+ *              description: The note description
+ *           body:
+ *              type: String
+ *              description: The note content
+ *           favourite:
+ *              type: String
+ *              description: An array that carries the user id who marks a note as favourite
+ *           user:
+ *              type: String
+ *              description: user id that created the note
+ *        example:
+ *          id: 65648ffa94874749b5
+ *          title: The Sunday School
+ *          description: 05-05-2022
+ *          body: I learnt a lot today from the teachings
+ *          favourite: 678595ggh594a7383993g
+ *          user: 678595ggh594a7383993g
+ *
+ */
+
+/**
+ * @swagger
+ * tags:
+ *    name: Notes
+ *    description: The Notes Managing API
+ */
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Returns all the list of notes
+ *     tags: [Notes]
+ *     responses:
+ *        200:
+ *          description: The list of all the notes
+ *          content:
+ *              applicaton/json:
+ *                  schema:
+ *                     type: array
+ *                     items:
+ *                        $ref: '#/components/schemas/Note'
+ */
+
+/**
+ * @swagger
+ * /mynotes:
+ *    get:
+ *      summary: Returns all the notes for a particular user
+ *      tags: [Notes]
+ *      responses:
+ *        200:
+ *          description: The list of all notes created by a particular user
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: array
+ *                      items:
+ *                         $ref: '#/components/schemas/Note'
+ */
 
 router.use(authController.protect);
 
