@@ -114,6 +114,10 @@ router
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Note'
+ *                  example:
+ *                     title: The Sunday School
+ *                     description: 05-05-2022
+ *                     body: I learnt a lot today from the teachings
  *        responses:
  *           200:
  *             description: The note was successfully created
@@ -121,9 +125,174 @@ router
  *                application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Note'
+ *                  example:
+ *                     id: 65648ffa94874749b5
+ *                     title: The Sunday School
+ *                     description: 05-05-2022
+ *                     body: I learnt a lot today from the teachings
+ *                     favourite:
+ *                     user: 678595ggh594a7383993g
  *           500:
  *             description: Server Error
  *
+ */
+
+/**
+ * @swagger
+ * /search:
+ *    get:
+ *      summary: Search for notes by title
+ *      tags: [Notes]
+ *      parameters:
+ *        - in: query
+ *          name: title
+ *          schema:
+ *            type: string
+ *          required: true
+ *      responses:
+ *          200:
+ *            description: Note found
+ *            content:
+ *                application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Note'
+ *          404:
+ *            description: Not found
+ *
+ */
+
+/**
+ * @swagger
+ * /favourite:
+ *      put:
+ *        summary: Add notes to favourites
+ *        tags: [Notes]
+ *        parameters:
+ *          - in: query
+ *            name: noteId
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description: The note id
+ *        responses:
+ *          200:
+ *            description: Note added to favourites
+ *            content:
+ *                application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Note'
+ *          404:
+ *            description: Not found
+ *
+ */
+
+/**
+ * @swagger
+ * /removefavourite:
+ *      put:
+ *        summary: Remove notes to favourites
+ *        tags: [Notes]
+ *        parameters:
+ *          - in: query
+ *            name: noteId
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description: the note id
+ *        responses:
+ *          200:
+ *            description: Note removed from favourites
+ *            content:
+ *                application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Note'
+ *                  example:
+ *                     id: 65648ffa94874749b5
+ *                     title: The Sunday School
+ *                     description: 05-05-2022
+ *                     body: I learnt a lot today from the teachings
+ *                     favourite:
+ *                     user: 678595ggh594a7383993g
+ *          404:
+ *            description: Not found
+ *
+ */
+
+/**
+ * @swagger
+ * /{id}:
+ *    patch:
+ *      summary: Edit or update note
+ *      tags: [Notes]
+ *      parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *        type: string
+ *        required: true
+ *        description: The note id
+ *      requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Note'
+ *      responses:
+ *        200:
+ *          description: The note was updated
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Note'
+ *        404:
+ *          description: The note was not found
+ *        500:
+ *          description: Server error
+ */
+
+/**
+ * @swagger
+ * /{id}:
+ *      get:
+ *        summary: Get note by id
+ *        tags: [Notes]
+ *        parameters:
+ *          - in: query
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description: The note id
+ *        responses:
+ *          200:
+ *            description: Note found by id
+ *            content:
+ *                application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Note'
+ *          404:
+ *            description: Not found
+ *
+ */
+
+/**
+ * @swagger
+ * /{id}:
+ *    delete:
+ *      summary: Delete note
+ *      tags: [Notes]
+ *      parameters:
+ *        - in: query
+ *          name: id
+ *          schema:
+ *             type: string
+ *          required: true
+ *          description: The note id
+ *      responses:
+ *          204:
+ *            description: Note deleted successfully
+ *          404:
+ *            description: Not found
  */
 
 module.exports = router;
