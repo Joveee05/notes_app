@@ -3,6 +3,26 @@ const noteController = require('../controllers/noteController');
 const authController = require('../controllers/authentication');
 const router = express.Router();
 
+router.use(authController.protect);
+
+router.get('/', noteController.getAllNotes);
+
+router.get('/myNotes', noteController.getMyNotes);
+
+router.post('/new-note', noteController.createNote);
+
+router.get('/search', noteController.searchNote);
+
+router.put('/favourite', noteController.favouriteNote);
+
+router.put('/removefavourite', noteController.removeFavourite);
+
+router
+  .route('/:id')
+  .get(noteController.getNote)
+  .patch(noteController.editNote)
+  .delete(noteController.deleteNote);
+
 /**
  * @swagger
  * components:
@@ -82,24 +102,28 @@ const router = express.Router();
  *                         $ref: '#/components/schemas/Note'
  */
 
-router.use(authController.protect);
-
-router.get('/', noteController.getAllNotes);
-
-router.get('/myNotes', noteController.getMyNotes);
-
-router.post('/new-note', noteController.createNote);
-
-router.get('/search', noteController.searchNote);
-
-router.put('/favourite', noteController.favouriteNote);
-
-router.put('/removefavourite', noteController.removeFavourite);
-
-router
-  .route('/:id')
-  .get(noteController.getNote)
-  .patch(noteController.editNote)
-  .delete(noteController.deleteNote);
+/**
+ * @swagger
+ * /new-note:
+ *     post:
+ *        summary: Create a new note
+ *        tags: [Notes]
+ *        requestBody:
+ *            required: true
+ *            content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Note'
+ *        responses:
+ *           200:
+ *             description: The note was successfully created
+ *             content:
+ *                application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Note'
+ *           500:
+ *             description: Server Error
+ *
+ */
 
 module.exports = router;
