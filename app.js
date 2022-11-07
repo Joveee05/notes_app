@@ -23,10 +23,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://jovi-notes-app.herokuapp.com/api/v1/notes',
-      },
-      {
-        url: 'https://jovi-notes-app.herokuapp.com/api/v1/users',
+        url: 'https://jovi-notes-app.herokuapp.com/api/v1',
       },
     ],
     components: {

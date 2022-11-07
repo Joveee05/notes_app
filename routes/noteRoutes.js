@@ -70,7 +70,7 @@ router
 
 /**
  * @swagger
- * /:
+ * /notes/:
  *   get:
  *     summary: Returns all the list of notes
  *     tags: [Notes]
@@ -87,7 +87,7 @@ router
 
 /**
  * @swagger
- * /mynotes:
+ * /notes/mynotes:
  *    get:
  *      summary: Returns all the notes for a particular user
  *      tags: [Notes]
@@ -104,7 +104,7 @@ router
 
 /**
  * @swagger
- * /new-note:
+ * /notes/new-note:
  *     post:
  *        summary: Create a new note
  *        tags: [Notes]
@@ -139,7 +139,7 @@ router
 
 /**
  * @swagger
- * /search:
+ * /notes/search:
  *    get:
  *      summary: Search for notes by title
  *      tags: [Notes]
@@ -163,7 +163,7 @@ router
 
 /**
  * @swagger
- * /favourite:
+ * /notes/favourite:
  *      put:
  *        summary: Add notes to favourites
  *        tags: [Notes]
@@ -188,7 +188,7 @@ router
 
 /**
  * @swagger
- * /removefavourite:
+ * /notes/removefavourite:
  *      put:
  *        summary: Remove notes to favourites
  *        tags: [Notes]
@@ -220,7 +220,7 @@ router
 
 /**
  * @swagger
- * /{id}:
+ * /notes/{id}:
  *    patch:
  *      summary: Edit or update note
  *      tags: [Notes]
@@ -232,11 +232,11 @@ router
  *        required: true
  *        description: The note id
  *      requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/Note'
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Note'
  *      responses:
  *        200:
  *          description: The note was updated
@@ -252,7 +252,7 @@ router
 
 /**
  * @swagger
- * /{id}:
+ * /notes/{id}:
  *      get:
  *        summary: Get note by id
  *        tags: [Notes]
@@ -277,7 +277,7 @@ router
 
 /**
  * @swagger
- * /{id}:
+ * /notes/{id}:
  *    delete:
  *      summary: Delete note
  *      tags: [Notes]

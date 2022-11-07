@@ -85,7 +85,7 @@ router.get('/', userController.getAllUsers);
 
 /**
  * @swagger
- * /login:
+ * /users/login:
  *      post:
  *          summary: Route for user login
  *          tags: [Users]
@@ -104,7 +104,7 @@ router.get('/', userController.getAllUsers);
  *              content:
  *                  application/json:
  *                      schema:
- *                          $ref: #/components/schemas/User
+ *                          $ref: '#/components/schemas/User'
  *                      example:
  *                          id: 65648ffa94874749b5
  *                          name: Max Max
@@ -114,14 +114,14 @@ router.get('/', userController.getAllUsers);
  *            401:
  *              description: Unauthorized
  *            500:
- *              description: Interna; server error
+ *              description: Internal server error
  *
  *
  */
 
 /**
  * @swagger
- * /sign-up:
+ * /users/sign-up:
  *    post:
  *      summary: User sign up
  *      tags: [Users]
@@ -158,7 +158,7 @@ router.get('/', userController.getAllUsers);
 
 /**
  * @swagger
- * /logout:
+ * /users/logout:
  *     get:
  *        summary: Log Out
  *        tags: [Users]
@@ -171,7 +171,7 @@ router.get('/', userController.getAllUsers);
 
 /**
  * @swagger
- * /updateMyPassword:
+ * /users/updateMyPassword:
  *       patch:
  *          summary: Change password
  *          tags: [Users]
@@ -201,6 +201,169 @@ router.get('/', userController.getAllUsers);
  *             400:
  *                description: Bad request
  *
+ */
+
+/**
+ * @swagger
+ * /users/{id}:
+ *    patch:
+ *      summary: Edit or update user
+ *      tags: [Users]
+ *      parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *        type: string
+ *        required: true
+ *        description: The user id
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ *            example:
+ *               name:
+ *               email:
+ *      responses:
+ *        200:
+ *          description: User updated
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ *        404:
+ *          description: The user was not found
+ *        500:
+ *          description: Server error
+ */
+
+/**
+ * @swagger
+ * /users/{id}:
+ *      get:
+ *        summary: Get user by id
+ *        tags: [Users]
+ *        parameters:
+ *          - in: query
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description: The user id
+ *        responses:
+ *          200:
+ *            description: User found
+ *            content:
+ *                application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/User'
+ *          404:
+ *            description: Not found
+ *
+ */
+
+/**
+ * @swagger
+ * /users/me:
+ *   get:
+ *     summary: Returns currently logged in user
+ *     tags: [Users]
+ *     responses:
+ *        200:
+ *          description: The details of logged in user
+ *          content:
+ *              applicaton/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/User'
+ */
+
+/**
+ * @swagger
+ * /users/{id}:
+ *    delete:
+ *      summary: Delete User
+ *      tags: [Users]
+ *      parameters:
+ *        - in: query
+ *          name: id
+ *          schema:
+ *             type: string
+ *          required: true
+ *          description: The user id
+ *      responses:
+ *          204:
+ *            description: No content
+ *          404:
+ *            description: Not found
+ */
+
+/**
+ * @swagger
+ * /users/deleteMe:
+ *    delete:
+ *      summary: Delete currently logged in user
+ *      tags: [Users]
+ *      responses:
+ *          204:
+ *            description: No content
+ *          400:
+ *            description: Bad request
+ *          500:
+ *            description: Server error
+ */
+
+/**
+ * @swagger
+ * /users/:
+ *   get:
+ *     summary: Returns all the list of users
+ *     tags: [Users]
+ *     responses:
+ *        200:
+ *          description: The list of all the users
+ *          content:
+ *              applicaton/json:
+ *                  schema:
+ *                     type: array
+ *                     items:
+ *                        $ref: '#/components/schemas/User'
+ */
+
+/**
+ * @swagger
+ * /users/updateMe:
+ *    patch:
+ *      summary: Edit or update currently logged in user details except password
+ *      tags: [Users]
+ *      parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *        type: string
+ *        required: true
+ *        description: The user id
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ *            example:
+ *               name:
+ *               email:
+ *               photo:
+ *      responses:
+ *        200:
+ *          description: User updated
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ *        404:
+ *          description: The user was not found
+ *        500:
+ *          description: Server error
  */
 
 module.exports = router;
