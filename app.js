@@ -62,6 +62,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to My Notes API',
+    Author: 'Brian Etaghene',
+  });
+});
+
 app.use('/api/v1/users/', userRouter);
 app.use('/api/v1/notes/', noteRouter);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));

@@ -9,6 +9,10 @@ This app can do:
 - CRUD Operations: create/read/update/delete notes
 - Allows a user to sign-up, login, logout, update password, delete account, search notes by title, add and remove notes from favourites.
 
-Swagger documentation:
+## Link to Hosted API
 
-- https://jovi-notes-app.herokuapp.com/api-docs
+- [Notes](https://jovi-notes-app.herokuapp.com/)
+
+## Swagger documentation:
+
+- [Swagger](https://jovi-notes-app.herokuapp.com/api-docs)
